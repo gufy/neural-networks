@@ -1,0 +1,1 @@
+% aproximuj funkci sin na <-3, 6>

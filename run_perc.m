@@ -1,3 +1,5 @@
+%% 
+
 p=[1 3 -1];
 xpos=[1 2 3; 1 3 1];
 xneg=[3 4 4; 4 2 4];
@@ -17,6 +19,32 @@ xr=0:5;
 figure;
 plot(xpos(1,:),xpos(2,:),'+r',xneg(1,:),xneg(2,:),'xb',xr,-(p(1)*xr+p(3))/p(2),'g');
 [pn, num_epochs]=perc_learn(p,x,c,0.5,100);  %learn the perceptron and depict the result
+figure;
+plot(xpos(1,:),xpos(2,:),'+r',xneg(1,:),xneg(2,:),'xb',xr,-(pn(1)*xr+pn(3))/pn(2),'g');
+
+fprintf('Minimum epochs: %d\n', num_epochs);
+
+%% three points almost inseparable 
+
+p=[0 2 -1];
+xpos=[0 0; 0 100];
+xneg=[0.01; 50];
+x=[xpos xneg];
+perm=[1 2 3];
+x=x(:,perm)
+c=[ones(1,2) 0];
+c=c(perm)
+xr=0:5;
+%manually initialized perceptron
+%training positive inputs, desired output 1
+%training negative inputs, desired output 0
+%permute the training smaples
+%permute also the desired outputs
+%plot the samples and the separating
+%hyperplane of the perceptron
+figure;
+plot(xpos(1,:),xpos(2,:),'+r',xneg(1,:),xneg(2,:),'xb',xr,-(p(1)*xr+p(3))/p(2),'g');
+[pn, num_epochs]=perc_learn(p,x,c,0.5,1000000);  %learn the perceptron and depict the result
 figure;
 plot(xpos(1,:),xpos(2,:),'+r',xneg(1,:),xneg(2,:),'xb',xr,-(pn(1)*xr+pn(3))/pn(2),'g');
 
